@@ -5,14 +5,17 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import { ProfileProvider } from "./contex/profile.contex";
 
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <PublicRoute exact path="/signin" component={Signin} />
-        <PrivateRoute path="/" component={Home} />
-      </Switch>
+      <ProfileProvider>
+        <Switch>
+          <PublicRoute exact path="/signin" component={Signin} />
+          <PrivateRoute path="/" component={Home} />
+        </Switch>
+      </ProfileProvider>
     </BrowserRouter>
   );
 }
