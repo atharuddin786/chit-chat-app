@@ -1,12 +1,27 @@
 import React from "react";
-import { Button, Divider, Drawer } from "rsuite";
+import { Button, Divider, Drawer, Message, toaster } from "rsuite";
 import { useProfile } from "../../contex/profile.contex";
 import { EditableInput } from "../EditableInput";
+import { child, ref, set, update } from "firebase/database";
+import { database } from "../../misc/firebase";
 
 const Dashboard = ({ SignOut }) => {
   const { profile } = useProfile();
+
   const Save = async (newData) => {
-    console.log(newData);
+    const userNickNameRef = ref(database, `/profiles/${profile.uid}/name`);
+    try {
+      await set(userNickNameRef, newData);
+      toaster.push(
+        <Message showIcon type="success">
+          Nick name has been updated successfully
+        </Message>
+      );
+    } catch (error) {
+      <Message showIcon type="error">
+        {error}
+      </Message>;
+    }
   };
   return (
     <>

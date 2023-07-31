@@ -36,7 +36,7 @@ export const EditableInput = ({
     if (trimmed !== initialValue) {
       await onSave(trimmed);
     }
-    setIsEditable(false);
+    setIsEditable(false); //prevent from saving empty field
   };
   return (
     <div>
